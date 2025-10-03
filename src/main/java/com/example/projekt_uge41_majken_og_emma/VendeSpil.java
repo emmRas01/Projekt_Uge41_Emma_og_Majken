@@ -28,11 +28,11 @@ public class VendeSpil extends Application {
         };
 
         // Her sættes banen op. Filen brik1.png skal findes i resource
-        brikker = new Brik[5][5];
-        for (int i=0; i<5; i++)
-            for (int j=0; j<5; j++) {
+        brikker = new Brik[6][6];
+        for (int i=0; i<6; i++)
+            for (int j=0; j<6; j++) {
                 // Lav hver brik som et objekt "Brik" med billede
-                brikker[i][j] = new Brik(i, j, "brik1.png");
+                brikker[i][j] = new Brik(i, j, "bagside.png");
                 // Tilføj den til scenegrafen
                 scenegraf.getChildren().add(brikker[i][j]);
                 // Tilføj eventen til brikken
@@ -40,7 +40,7 @@ public class VendeSpil extends Application {
             }
 
         // Sæt scenen op
-        Scene scene = new Scene(scenegraf, 600, 600);
+        Scene scene = new Scene(scenegraf, 610, 610);
         stage.setTitle("MemorySkelet!");
         stage.setScene(scene);
         stage.show();

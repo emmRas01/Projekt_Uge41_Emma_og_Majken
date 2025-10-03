@@ -4,15 +4,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
-public class Brik extends ImageView {
+public class Brik2 extends ImageView {
 
     private Image forside, bagside;
 
-    public Brik(int x, int y, String filnavn) {
+    public Brik2(int x, int y, String filnavn) {
         // Sæt ny brik op med forside- og bagsidebillede (alle brikker har samme bagside).
         // Vis forsiden som udgangspunkt
         forside = new Image(getClass().getResource(filnavn).toString());
-        bagside = new Image(getClass().getResource("brik1.png").toString());
+        bagside = new Image(getClass().getResource("brik2.png").toString());
         setImage(forside);
         // Placér brikken: lav selv koordinaterne, så brikkerne spredes
         setX(x*90);
