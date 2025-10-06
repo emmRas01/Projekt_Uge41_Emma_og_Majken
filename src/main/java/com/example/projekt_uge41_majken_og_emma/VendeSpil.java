@@ -14,13 +14,11 @@ public class VendeSpil extends Application {
     // Alle brikker holdes i arrayet brikker
     private Brik[][] brikker;
 
-    @Override
     public void start(Stage stage) throws IOException {
         Pane scenegraf = new Pane();
 
         // eventHandler som senere sættes på hver brik, så man kan klikke med musun.
         EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
-            @Override
             public void handle(MouseEvent e) {
                 Brik b = (Brik)e.getSource();
                 b.vend();
