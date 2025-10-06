@@ -17,7 +17,14 @@ public class VendeSpil extends Application {
     // Alle brikker holdes i arrayet brikker
     private Brik[][] brikker;
     private PathTransition pt; //så metoden startstop() kan kalde pt / kende pt
-    boolean stoppede = false;
+    private String[] brikListe = {
+            "brik3.png", "brik16.png", "brik9.png", "brik18.png", "brik15.png", "brik8.png",
+            "brik14.png", "brik11.png", "brik1.png", "brik4.png", "brik7.png", "brik12.png",
+            "brik1.png", "brik12.png", "brik2.png", "brik9.png", "brik10.png", "brik5.png",
+            "brik2.png", "brik10.png", "brik7.png", "brik6.png", "brik14.png", "brik11.png",
+            "brik18.png", "brik6.png", "brik4.png", "brik5.png", "brik3.png", "brik17.png",
+            "brik15.png", "brik17.png", "brik13.png", "brik16.png", "brik8.png", "brik13.png",
+    };
 
     public void start(Stage stage) throws IOException {
         Pane scenegraf = new Pane();
@@ -32,14 +39,16 @@ public class VendeSpil extends Application {
 
         // Her sættes banen op. Filen brik1.png skal findes i resource
         brikker = new Brik[6][6];
+        int t = 0;
         for (int i = 0; i < 6; i++)
             for (int j = 0; j < 6; j++) {
                 // Lav hver brik som et objekt "Brik" med billede
-                brikker[i][j] = new Brik(i, j, "bagside.png");
+                brikker[i][j] = new Brik(i, j, brikListe[t]);
                 // Tilføj den til scenegrafen
                 scenegraf.getChildren().add(brikker[i][j]);
                 // Tilføj eventen til brikken
                 brikker[i][j].addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+                ++t;
             }
 
         //rectangel som knap
@@ -55,20 +64,7 @@ public class VendeSpil extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    String[]brikListe = {
-            "brik1", "brik2", "brik3", "brik4", "brik5", "brik6", "brik7", "brik8", "brik9", "brik10",
-            "brik11", "brik12", "brik13", "brik14", "brik15", "brik16", "brik17", "brik18",
-    };
 
-    public void setupBrikker()
-    {
-
-    }
-
-    public void blandBrikker()
-    {
-
-    }
     public void restart() //ved klik på rectangel starter denne metode
     {
 

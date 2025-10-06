@@ -7,12 +7,12 @@ public class Brik extends ImageView {
 
     private Image forside, bagside;
 
-    public Brik(int x, int y, String filnavn) {
+    public Brik(int x, int y, String brikListe) {
         // Sæt ny brik op med forside- og bagsidebillede (alle brikker har samme bagside).
         // Vis forsiden som udgangspunkt
-        forside = new Image(getClass().getResource(filnavn).toString());
-        bagside = new Image(getClass().getResource("brik1.png").toString());
-        setImage(forside);
+        forside = new Image(getClass().getResource(brikListe).toString());
+        bagside = new Image(getClass().getResource("bagside.png").toString());
+        setImage(bagside);
         // Placér brikken: lav selv koordinaterne, så brikkerne spredes
         setX(x * 90);
         setY(y * 90);
@@ -22,6 +22,6 @@ public class Brik extends ImageView {
         // Her skal brikken vendes.
         // Lige nu udskrives lidt oplysninger om brikken og bagsiden vises
         System.out.println("brik " + getX() + "," + getY());
-        setImage(bagside);
+        setImage(forside);
     }
 }
