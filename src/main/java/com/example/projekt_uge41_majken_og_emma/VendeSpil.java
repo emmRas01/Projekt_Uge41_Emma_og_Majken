@@ -38,7 +38,7 @@ public class VendeSpil extends Application {
             }
 
         // Sæt scenen op
-        Scene scene = new Scene(scenegraf, 610, 610);
+        Scene scene = new Scene(scenegraf, 540, 600);
         stage.setTitle("MemorySkelet!");
         stage.setScene(scene);
         stage.show();
