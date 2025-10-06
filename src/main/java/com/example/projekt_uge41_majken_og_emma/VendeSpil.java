@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -56,12 +57,20 @@ public class VendeSpil extends Application {
                 ++t;
             }
 
-        //rectangel som knap
+        //rektangel som knap
         Rectangle rect = new Rectangle(220, 550, 100, 40);
         rect.setFill(Color.BLACK);
-        rect.setOnMouseClicked(event -> restart());
 
-        scenegraf.getChildren().addAll(rect); //rect vises på scenen
+        //tekst oven på vores rektangel / knap
+        Text knapTekst = new Text("Reset");
+        knapTekst.setFill(Color.WHITE);
+        knapTekst.setX(255);
+        knapTekst.setY(575);
+
+        rect.setOnMouseClicked(event -> restart());
+        knapTekst.setOnMouseClicked(event -> restart());
+
+        scenegraf.getChildren().addAll(rect, knapTekst); //rect vises på scenen
 
         // Sæt scenen op
         Scene scene = new Scene(scenegraf, 540, 600);
