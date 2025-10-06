@@ -1,14 +1,17 @@
 package com.example.projekt_uge41_majken_og_emma;
 
 import javafx.animation.PathTransition;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -70,17 +73,43 @@ public class VendeSpil extends Application {
     public void klik(MouseEvent e)
     {
        Brik b = (Brik) e.getSource();
+
+       if (b == vendtBrik1 || b == vendtBrik2) return; //man kan ikke vende brikker der allerede er vendt.
+
+       //Første brik
        if (vendtBrik1 == null)
            {
                 vendtBrik1 = b;
                 vendtBrik1.vend();
+                return;
            }
-           else if (vendtBrik2 == null)
+       //anden brik
+       if(vendtBrik2 == null)
            {
-                vendtBrik2 = b;
-                vendtBrik2.vend();
+               vendtBrik2 = b;
+               vendtBrik2.vend();
+
+               if(vendtBrik1.getBriknavn().equals(vendtBrik2.getBriknavn()))  //brikkerne er et match
+                   {
+                       PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+                       pause.setOnFinished(event-> {
+                           vendtBrik1.setVisible(false);
+                           vendtBrik2.setVisible(false);
+                           vendtBrik1 = null;
+                           vendtBrik2 = null;
+                       });
+                       pause.play();
+                   } else {
+                       PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+                       pause.setOnFinished(event-> {
+                           vendtBrik1.setImage(new Image(getClass().getResource("bagside.png").toString()));
+                           vendtBrik2.setImage(new Image(getClass().getResource("bagside.png").toString()));
+                           vendtBrik1 = null;
+                           vendtBrik2 = null;
+                       });
+                       pause.play();
+               }
            }
-           
     }
 
     public void restart() //ved klik på rectangel starter denne metode

@@ -6,8 +6,11 @@ import javafx.scene.image.ImageView;
 public class Brik extends ImageView {
 
     private Image forside, bagside;
+    private String brikNavn;
 
-    public Brik(int x, int y, String brikListe) {
+    public Brik(int x, int y, String brikListe)
+    {
+        brikNavn = brikListe;
         // Sæt ny brik op med forside- og bagsidebillede (alle brikker har samme bagside).
         // Vis forsiden som udgangspunkt
         forside = new Image(getClass().getResource(brikListe).toString());
@@ -18,10 +21,14 @@ public class Brik extends ImageView {
         setY(y * 90);
     }
 
-    public void vend() {
+    public void vend()
+    {
         // Her skal brikken vendes.
-        // Lige nu udskrives lidt oplysninger om brikken og bagsiden vises
-        System.out.println("brik " + getX() + "," + getY());
         setImage(forside);
+    }
+
+    public String getBriknavn()
+    {
+         return brikNavn;
     }
 }
