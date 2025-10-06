@@ -16,6 +16,8 @@ public class VendeSpil extends Application {
 
     // Alle brikker holdes i arrayet brikker
     private Brik[][] brikker;
+    private Brik vendtBrik1 = null;
+    private Brik vendtBrik2 = null;
     private PathTransition pt; //så metoden startstop() kan kalde pt / kende pt
     private String[] brikListe = {
             "brik3.png", "brik16.png", "brik9.png", "brik18.png", "brik15.png", "brik8.png",
@@ -47,7 +49,7 @@ public class VendeSpil extends Application {
                 // Tilføj den til scenegrafen
                 scenegraf.getChildren().add(brikker[i][j]);
                 // Tilføj eventen til brikken
-                brikker[i][j].addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+                brikker[i][j].setOnMouseClicked(e -> klik(e));
                 ++t;
             }
 
@@ -63,6 +65,22 @@ public class VendeSpil extends Application {
         stage.setTitle("Vende Spil :)");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void klik(MouseEvent e)
+    {
+       Brik b = (Brik) e.getSource();
+       if (vendtBrik1 == null)
+           {
+                vendtBrik1 = b;
+                vendtBrik1.vend();
+           }
+           else if (vendtBrik2 == null)
+           {
+                vendtBrik2 = b;
+                vendtBrik2.vend();
+           }
+           
     }
 
     public void restart() //ved klik på rectangel starter denne metode
