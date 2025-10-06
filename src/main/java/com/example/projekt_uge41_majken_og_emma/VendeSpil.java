@@ -56,6 +56,11 @@ public class VendeSpil extends Application {
         stage.show();
     }
 
+    String[]brikListe = {
+            "brik1", "brik2", "brik3", "brik4", "brik5", "brik6", "brik7", "brik8", "brik9", "brik10",
+            "brik11", "brik12", "brik13", "brik14", "brik15", "brik16", "brik17", "brik18",
+    };
+
     public void restart() //ved klik på rectangel starter denne metode
     {
 
