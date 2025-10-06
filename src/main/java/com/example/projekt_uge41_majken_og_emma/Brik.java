@@ -15,8 +15,8 @@ public class Brik extends ImageView {
         bagside = new Image(getClass().getResource("brik1.png").toString());
         setImage(forside);
         // Placér brikken: lav selv koordinaterne, så brikkerne spredes
-        setX(x*90);
-        setY(y*90);
+        setX(x * 90);
+        setY(y * 90);
     }
 
     public void vend() {
