@@ -1,9 +1,7 @@
 package com.example.projekt_uge41_majken_og_emma;
 
-import javafx.animation.PathTransition;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -16,14 +14,13 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
-public class VendeSpil extends Application {
-
-    // Alle brikker holdes i arrayet brikker
-    private Brik[][] brikker;
-    private Brik vendtBrik1 = null;
+public class VendeSpil extends Application
+{
+    private Brik[][] brikker; //opretter et 2D array. Alle brikker holdes i arrayet.
+    private Brik vendtBrik1 = null; //variabel der bruges til at holde styr på hvilke brikker der er vendt
     private Brik vendtBrik2 = null;
-    private PathTransition pt; //så metoden startstop() kan kalde pt / kende pt
-    private String[] brikListe = {
+
+    private String[] brikListe = { //indeholder navnene på hvert brik/billede
             "brik3.png", "brik16.png", "brik9.png", "brik18.png", "brik15.png", "brik8.png",
             "brik14.png", "brik11.png", "brik1.png", "brik4.png", "brik7.png", "brik12.png",
             "brik1.png", "brik12.png", "brik2.png", "brik9.png", "brik10.png", "brik5.png",
@@ -33,44 +30,32 @@ public class VendeSpil extends Application {
     };
 
     public void start(Stage stage) throws IOException {
-        Pane scenegraf = new Pane();
+        Pane scenegraf = new Pane(); //opretter en scene
 
-        // eventHandler som senere sættes på hver brik, så man kan klikke med musun.
-        EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent e) {
-                Brik b = (Brik) e.getSource();
-                b.vend();
-            }
-        };
-
-        // Her sættes banen op. Filen brik1.png skal findes i resource
+        //Her sættes banen op i et 6x6 gitter
         brikker = new Brik[6][6];
-        int t = 0;
+        int t = 0; //vi laver en tæller til at lave en loop, så alle 36 brikker får et unikt billed.
         for (int i = 0; i < 6; i++)
             for (int j = 0; j < 6; j++) {
-                // Lav hver brik som et objekt "Brik" med billede
-                brikker[i][j] = new Brik(i, j, brikListe[t]);
-                // Tilføj den til scenegrafen
-                scenegraf.getChildren().add(brikker[i][j]);
-                // Tilføj eventen til brikken
-                brikker[i][j].setOnMouseClicked(e -> klik(e));
-                ++t;
+                brikker[i][j] = new Brik(i, j, brikListe[t]); //Lav hver brik som et objekt "Brik" med position og billede.
+                scenegraf.getChildren().add(brikker[i][j]); //Tilføj brikken til scenegrafen
+                brikker[i][j].setOnMouseClicked(e -> klik(e)); //Tilføj musse-klik til brikken
+                ++t; //tælleren stiger med 1 for hver brik, der bliver lavet.
             }
 
         //rektangel som knap
         Rectangle rect = new Rectangle(220, 550, 100, 40);
         rect.setFill(Color.BLACK);
-
         //tekst oven på vores rektangel / knap
         Text knapTekst = new Text("Reset");
         knapTekst.setFill(Color.WHITE);
         knapTekst.setX(255);
         knapTekst.setY(575);
 
-        rect.setOnMouseClicked(event -> restart());
-        knapTekst.setOnMouseClicked(event -> restart());
+        rect.setOnMouseClicked(event -> restart()); //ved klik på rectangel starter restart-metoden
+        knapTekst.setOnMouseClicked(event -> restart()); //ved klik på knapTekst starter restart-metoden
 
-        scenegraf.getChildren().addAll(rect, knapTekst); //rect vises på scenen
+        scenegraf.getChildren().addAll(rect, knapTekst); //rectangel og tekst på knappen vises på scenen
 
         // Sæt scenen op
         Scene scene = new Scene(scenegraf, 540, 600);
@@ -81,44 +66,45 @@ public class VendeSpil extends Application {
 
     public void klik(MouseEvent e)
     {
-       Brik b = (Brik) e.getSource();
+        Brik b = (Brik) e.getSource(); //finder ud af hvilken brik der blev klikket på
 
-       if (b == vendtBrik1 || b == vendtBrik2) return; //man kan ikke vende brikker der allerede er vendt.
+        if (b == vendtBrik1 || b == vendtBrik2) return; //tjek om brikken allerede er blevet vendt.
+        //man kan ikke vende brikker der allerede er vendt.
+        //Første brik
+        if (vendtBrik1 == null) //er der ikke vendt en brik endnu? -> Så er det første brik.
+        {
+            vendtBrik1 = b;     //ved 1. klik gemmes brikken som "vendtBrik1"
+            vendtBrik1.vend();  //vender brikken, så billedet kan ses.
+        } else { //der er allerede vendt en brik -> så er det anden brik.
+            vendtBrik2 = b;    //ved 2. klik gemmes brikken som "vendtBrik2"
+            vendtBrik2.vend(); //vender brikken, så billedet kan ses.
 
-       //Første brik
-       if (vendtBrik1 == null)
-           {
-                vendtBrik1 = b;
-                vendtBrik1.vend();
-                return;
-           }
-       //anden brik
-       if(vendtBrik2 == null)
-           {
-               vendtBrik2 = b;
-               vendtBrik2.vend();
-
-               if(vendtBrik1.getBriknavn().equals(vendtBrik2.getBriknavn())) // hvis brikkerne er et match
-                   {
-                       PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
-                       pause.setOnFinished(event-> {
-                           vendtBrik1.setVisible(false);
-                           vendtBrik2.setVisible(false);
-                           vendtBrik1 = null;
-                           vendtBrik2 = null;
-                       });
-                       pause.play();
-                   } else { //hvis brikkerne ikke er et match
-                       PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
-                       pause.setOnFinished(event-> {
-                           vendtBrik1.setImage(new Image(getClass().getResource("bagside.png").toString()));
-                           vendtBrik2.setImage(new Image(getClass().getResource("bagside.png").toString()));
-                           vendtBrik1 = null;
-                           vendtBrik2 = null;
-                       });
-                       pause.play();
-               }
-           }
+            if (vendtBrik1.getBriknavn().equals(vendtBrik2.getBriknavn())) //det er et match
+            // den henter navnet på begge billeder og tjekker om de er equals.
+            {
+                PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+                //vi bruger PauseTransition til at give spilleren 0.5 sec til at se brikkerne inden de forsvinder.
+                pause.setOnFinished(event -> //efter de 0,5 sek er gået skal følgende ske
+                {
+                    vendtBrik1.setVisible(false); //gør brikken usynlig
+                    vendtBrik2.setVisible(false); //gør brikken usynlig
+                    vendtBrik1 = null; //nulstiller, så vi kan klikke på flere brikker
+                    vendtBrik2 = null; //nulstiller, så vi kan klikke på flere brikker
+                });
+                pause.play(); //spillet pauses, så setOnFinished starter 0,5 sek efter.
+            } else { //det er ikke et match
+                PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+                //vi bruger PauseTransition til at give spilleren 0.5 sec til at se brikkerne inden de vendes til bagsiden.
+                pause.setOnFinished(event -> //efter de 0,5 sek er gået skal følgende ske
+                {
+                    vendtBrik1.setImage(new Image(getClass().getResource("bagside.png").toString())); //brikkerne vendes til bagsiden
+                    vendtBrik2.setImage(new Image(getClass().getResource("bagside.png").toString())); //brikkerne vendes til bagsiden
+                    vendtBrik1 = null; //nulstiller, så vi kan klikke på 2 nye brikker
+                    vendtBrik2 = null; //nulstiller, så vi kan klikke på 2 nye brikker
+                });
+                pause.play();
+            }
+        }
     }
 
     public void restart() //ved klik på rectangel starter denne metode
