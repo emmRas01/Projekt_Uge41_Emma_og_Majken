@@ -89,7 +89,7 @@ public class VendeSpil extends Application {
                vendtBrik2 = b;
                vendtBrik2.vend();
 
-               if(vendtBrik1.getBriknavn().equals(vendtBrik2.getBriknavn()))  //brikkerne er et match
+               if(vendtBrik1.getBriknavn().equals(vendtBrik2.getBriknavn())) // hvis brikkerne er et match
                    {
                        PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                        pause.setOnFinished(event-> {
@@ -99,7 +99,7 @@ public class VendeSpil extends Application {
                            vendtBrik2 = null;
                        });
                        pause.play();
-                   } else {
+                   } else { //hvis brikkerne ikke er et match
                        PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                        pause.setOnFinished(event-> {
                            vendtBrik1.setImage(new Image(getClass().getResource("bagside.png").toString()));
