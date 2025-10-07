@@ -22,15 +22,16 @@ public class VendeSpil extends Application
     private Brik[][] brikker; //opretter et 2D array. Alle brikker holdes i arrayet.
 
     private Brik vendtBrik1 = null; //variabel der bruges til at holde styr på hvilke brikker der er vendt
-    private Brik vendtBrik2 = null;
+    private Brik vendtBrik2 = null; //variabel der bruges til at holde styr på hvilke brikker der er vendt
 
-    private int antalStik = 0;
-    private Text antalStikTekst;
-    private int antalTraek = 0;
-    private Text antalTraekTekst;
-    private Text vinderTekst;
+    private int antalStik = 0; //tæller der holder styr på antal stik
+    private Text antalStikTekst; //variabel der indeholder teksten til antal stik
+    private int antalTraek = 0; //tæller der holder styr på antal træk
+    private Text antalTraekTekst; //variabel der indeholder teksten til antal træk
+    private Text vinderTekst; //variabel der indeholder teksten til vinderen
 
-    private Pane scenegraf;
+    private Pane scenegraf; //variabel der indeholder vores grafiske elementer.
+                            // Placeres her så metoden baneOpsaetning kan bruge den.
 
     private String[] brikListe = { //indeholder navnene på hvert brik/billede
             "brik3.png", "brik16.png", "brik9.png", "brik18.png", "brik15.png", "brik8.png",
@@ -41,16 +42,18 @@ public class VendeSpil extends Application
             "brik15.png", "brik17.png", "brik13.png", "brik16.png", "brik8.png", "brik13.png",
     };
 
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException
+    {
         scenegraf = new Pane(); //opretter en scene
 
-        java.util.Collections.shuffle(java.util.Arrays.asList(brikListe)); //bland brikkerne
+        java.util.Collections.shuffle(java.util.Arrays.asList(brikListe)); //blander brikkerne tilfældigt
 
-        baneOpsaetning();
+        baneOpsaetning(); //sætter banen op
 
         //opretter rektangel -> bruger vi senere som knap
         Rectangle rect = new Rectangle(245, 600, 100, 40);
         rect.setFill(Color.GREY);
+
         //opretter tekst oven på vores rektangel / knap
         Text knapTekst = new Text("Reset");
         knapTekst.setFill(Color.WHITE);
@@ -82,34 +85,22 @@ public class VendeSpil extends Application
         rect.setOnMouseClicked(event -> restart()); //ved klik på rectangel starter restart-metoden
         knapTekst.setOnMouseClicked(event -> restart()); //ved klik på knapTekst starter restart-metoden
 
-        scenegraf.getChildren().addAll(rect, knapTekst, antalStikTekst, antalTraekTekst); //rectangel og tekst på knappen vises på scenen
+        scenegraf.getChildren().addAll(rect, knapTekst, antalStikTekst, antalTraekTekst); //rectangel og tekst vises på scenen
 
         // Sæt scenen op
-        Scene scene = new Scene(scenegraf, 590, 650);
-        stage.setTitle("Vende Spil :)");
-        stage.setScene(scene);
-        stage.show();
+        Scene scene = new Scene(scenegraf, 590, 650); //opretter en ny scene
+        stage.setTitle("Vende Spil :)"); //titlen på vores vindue/stage sættes
+        stage.setScene(scene); //scenen placeres i vinduet/stage
+        stage.show(); //viser vinduet/stage
     }
 
-    // blander et array af int i tilfældig rækkeflge
-    public void blandBrikker(int[] brikliste)
+    public void baneOpsaetning() //metode der placere vores brikker
     {
-        Random rand = new Random();
-        for (int i = 0; i < brikListe.length; i++) {
-            int randomIndexToSwap = rand.nextInt(brikListe.length);
-            String temp = String.valueOf(Integer.parseInt(brikListe[randomIndexToSwap]));
-            brikListe[randomIndexToSwap] = brikListe[i];
-            brikListe[i] = temp;
-        }
-    }
-
-    public void baneOpsaetning()
-    {
-        //Her sættes banen op i et 6x6 gitter
-        brikker = new Brik[6][6];
+        brikker = new Brik[6][6]; //Her sættes banen op i et 6x6 gitter
         int t = 0; //vi laver en tæller til at lave en loop, så alle 36 brikker får et unikt billed.
-        for (int i = 0; i < 6; i++)
-            for (int j = 0; j < 6; j++) {
+        for (int i = 0; i < 6; i++) //løber igennem rækkerne
+            for (int j = 0; j < 6; j++) //løber igennem kolonnerne
+            {
                 brikker[i][j] = new Brik(i, j, brikListe[t]); //Lav hver brik som et objekt "Brik" med position og billede.
                 scenegraf.getChildren().add(brikker[i][j]); //Tilføj brikken til scenegrafen
                 brikker[i][j].setOnMouseClicked(e -> klik(e)); //Tilføj musse-klik til brikken
@@ -117,7 +108,7 @@ public class VendeSpil extends Application
             }
     }
 
-    public void klik(MouseEvent e)
+    public void klik(MouseEvent e) //metode der styrer vores spil-logik
     {
         Brik b = (Brik) e.getSource(); //finder ud af hvilken brik der blev klikket på
 
@@ -132,18 +123,18 @@ public class VendeSpil extends Application
             vendtBrik2 = b;    //ved 2. klik gemmes brikken som "vendtBrik2"
             vendtBrik2.vend(); //vender brikken, så billedet kan ses.
 
-            antalTraek++;
-            antalTraekTekst.setText("Antal Træk: " + antalTraek);
+            antalTraek++; //når spilleren har vendt 2 brikker giver det 1 træk
+            antalTraekTekst.setText("Antal Træk: " + antalTraek); //opdatere tekst
 
             if (vendtBrik1.getBriknavn().equals(vendtBrik2.getBriknavn())) //det er et match
             // den henter navnet på begge billeder og tjekker om de er equals.
             {
                 antalStik++; //tilføjer 1 point når kortene er et match
-                antalStikTekst.setText("Antal Stik: " + antalStik); //tilføjer til tekst
-                if (antalStik == 18)
+                antalStikTekst.setText("Antal Stik: " + antalStik); //opdatere tekst
+                if (antalStik == 18) //18 stik -> du har vundet.
                 {
-                    vinderTekst.setText("DU HAR VUNDET!");
-                    scenegraf.getChildren().addAll(vinderTekst);
+                    vinderTekst.setText("DU HAR VUNDET!"); //opdatere tekst
+                    scenegraf.getChildren().addAll(vinderTekst); //tilføjer teksten til scenen
                 }
 
                 PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
@@ -171,14 +162,15 @@ public class VendeSpil extends Application
         }
     }
 
-    public void restart() //ved klik på rectangel starter denne metode
+    public void restart() //ved klik på rectangel restarter spillet
     {
-        baneOpsaetning();
-        antalStik = 0;
-        antalStikTekst.setText("Antal Stik: " + antalStik);
+        baneOpsaetning(); //kalder bane opsætningen, så banen startes forfra
+        antalStik = 0; //nulstiller tælleren
+        antalStikTekst.setText("Antal Stik: " + antalStik); //opdatere tekst
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch();
     }
 }
