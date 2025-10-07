@@ -11,24 +11,20 @@ public class Brik extends ImageView {
     public Brik(int x, int y, String brikListe)
     {
         brikNavn = brikListe;
-        // Sæt ny brik op med forside- og bagsidebillede (alle brikker har samme bagside).
-        // Vis forsiden som udgangspunkt
-        forside = new Image(getClass().getResource(brikListe).toString());
+        forside = new Image(getClass().getResource(brikListe).toString()); //Vis forsiden som udgangspunkt
         bagside = new Image(getClass().getResource("bagside.png").toString());
         setImage(bagside);
-        // Placér brikken: lav selv koordinaterne, så brikkerne spredes
-        setX(x * 90);
-        setY(y * 90);
+        setX(x * 90); //placering af brikken på x-aksen.
+        setY(y * 90); //placering af brikken på y-aksen.
     }
 
     public void vend()
     {
-        // Her skal brikken vendes.
-        setImage(forside);
+        setImage(forside); // Her vendes brikken.
     }
 
     public String getBriknavn()
     {
-         return brikNavn;
+         return brikNavn; //her henter vi navnet på den enkelte brik
     }
 }
