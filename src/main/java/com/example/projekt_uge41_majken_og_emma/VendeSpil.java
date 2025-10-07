@@ -50,7 +50,7 @@ public class VendeSpil extends Application
 
         //opretter rektangel -> bruger vi senere som knap
         Rectangle rect = new Rectangle(245, 600, 100, 40);
-        rect.setFill(Color.BLACK);
+        rect.setFill(Color.GREY);
         //opretter tekst oven på vores rektangel / knap
         Text knapTekst = new Text("Reset");
         knapTekst.setFill(Color.WHITE);
