@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -27,6 +28,7 @@ public class VendeSpil extends Application
     private Text antalStikTekst;
     private int antalTraek = 0;
     private Text antalTraekTekst;
+    private Text vinderTekst;
 
     private Pane scenegraf;
 
@@ -52,23 +54,30 @@ public class VendeSpil extends Application
         //opretter tekst oven på vores rektangel / knap
         Text knapTekst = new Text("Reset");
         knapTekst.setFill(Color.WHITE);
-        knapTekst.setFont(Font.font("Cambria", 20)); //teksttype og tekst størrelse
+        knapTekst.setFont(Font.font("Cambria", FontWeight.BOLD,20)); //teksttype og tekst størrelse
         knapTekst.setX(271);
         knapTekst.setY(627);
 
         //opretter antal stik som tekst
         antalStikTekst = new Text("Antal Stik: " + antalStik);
         antalStikTekst.setFill(Color.BLACK);
-        antalStikTekst.setFont(Font.font("Cambria", 20)); //teksttype og tekst størrelse
-        antalStikTekst.setX(25);
+        antalStikTekst.setFont(Font.font("Cambria", FontWeight.BOLD, 20)); //teksttype og tekst størrelse
+        antalStikTekst.setX(445);
         antalStikTekst.setY(625);
 
         //opretter antal træk som tekst
         antalTraekTekst = new Text("Antal Træk: " + antalTraek);
         antalTraekTekst.setFill(Color.BLACK);
-        antalTraekTekst.setFont(Font.font("Cambria", 20)); //teksttype og tekst størrelse
-        antalTraekTekst.setX(450);
+        antalTraekTekst.setFont(Font.font("Cambria", FontWeight.BOLD, 20)); //teksttype og tekst størrelse
+        antalTraekTekst.setX(25);
         antalTraekTekst.setY(625);
+
+        //opretter vinder som tekst
+        vinderTekst = new Text("DU HAR VUNDET!");
+        vinderTekst.setFill(Color.GOLD);
+        vinderTekst.setFont(Font.font("Cambria", FontWeight.BOLD, 50)); //teksttype og tekst størrelse
+        vinderTekst.setX(95);
+        vinderTekst.setY(305);
 
         rect.setOnMouseClicked(event -> restart()); //ved klik på rectangel starter restart-metoden
         knapTekst.setOnMouseClicked(event -> restart()); //ved klik på knapTekst starter restart-metoden
@@ -131,6 +140,11 @@ public class VendeSpil extends Application
             {
                 antalStik++; //tilføjer 1 point når kortene er et match
                 antalStikTekst.setText("Antal Stik: " + antalStik); //tilføjer til tekst
+                if (antalStik == 18)
+                {
+                    vinderTekst.setText("DU HAR VUNDET!");
+                    scenegraf.getChildren().addAll(vinderTekst);
+                }
 
                 PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                 //vi bruger PauseTransition til at give spilleren 0.5 sec til at se brikkerne inden de forsvinder.
