@@ -61,22 +61,22 @@ public class VendeSpil extends Application
         //opretter antal stik som tekst
         antalStikTekst = new Text("Antal Stik: " + antalStik);
         antalStikTekst.setFill(Color.BLACK);
-        antalStikTekst.setFont(Font.font("Cambria", FontWeight.BOLD, 20)); //teksttype og tekst størrelse
+        antalStikTekst.setFont(Font.font("Constantia", FontWeight.BOLD, 20)); //teksttype og tekst størrelse
         antalStikTekst.setX(445);
         antalStikTekst.setY(625);
 
         //opretter antal træk som tekst
         antalTraekTekst = new Text("Antal Træk: " + antalTraek);
         antalTraekTekst.setFill(Color.BLACK);
-        antalTraekTekst.setFont(Font.font("Cambria", FontWeight.BOLD, 20)); //teksttype og tekst størrelse
+        antalTraekTekst.setFont(Font.font("Constantia", FontWeight.BOLD, 20)); //teksttype og tekst størrelse
         antalTraekTekst.setX(25);
         antalTraekTekst.setY(625);
 
         //opretter vinder som tekst
         vinderTekst = new Text("DU HAR VUNDET!");
         vinderTekst.setFill(Color.GOLD);
-        vinderTekst.setFont(Font.font("Cambria", FontWeight.BOLD, 50)); //teksttype og tekst størrelse
-        vinderTekst.setX(95);
+        vinderTekst.setFont(Font.font("Jokerman", FontWeight.BOLD, 50)); //teksttype og tekst størrelse
+        vinderTekst.setX(80);
         vinderTekst.setY(305);
 
         rect.setOnMouseClicked(event -> restart()); //ved klik på rectangel starter restart-metoden
