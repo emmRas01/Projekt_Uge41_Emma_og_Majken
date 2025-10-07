@@ -108,7 +108,7 @@ public class VendeSpil extends Application
             // den henter navnet på begge billeder og tjekker om de er equals.
             {
                 antalStik++; //tilføjer 1 point når kortene er et match
-                antalStikTekst.setText("Antal Stik: " + antalStik);
+                antalStikTekst.setText("Antal Stik: " + antalStik); //tilføjer til tekst
 
                 PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                 //vi bruger PauseTransition til at give spilleren 0.5 sec til at se brikkerne inden de forsvinder.
