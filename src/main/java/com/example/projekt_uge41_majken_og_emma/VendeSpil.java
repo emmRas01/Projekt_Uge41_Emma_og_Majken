@@ -165,8 +165,12 @@ public class VendeSpil extends Application
     public void restart() //ved klik på rectangel restarter spillet
     {
         baneOpsaetning(); //kalder bane opsætningen, så banen startes forfra
+
         antalStik = 0; //nulstiller tælleren
         antalStikTekst.setText("Antal Stik: " + antalStik); //opdatere tekst
+
+        antalTraek = 0; //nulstiller tælleren
+        antalTraekTekst.setText("Antal Træk: " + antalTraek); //opdatere tekst
     }
 
     public static void main(String[] args)
