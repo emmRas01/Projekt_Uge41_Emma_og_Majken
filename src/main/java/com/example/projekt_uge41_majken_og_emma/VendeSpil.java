@@ -20,6 +20,8 @@ public class VendeSpil extends Application
     private Brik[][] brikker; //opretter et 2D array. Alle brikker holdes i arrayet.
     private Brik vendtBrik1 = null; //variabel der bruges til at holde styr på hvilke brikker der er vendt
     private Brik vendtBrik2 = null;
+    private int antalStik = 0;
+    private Text antalStikTekst;
 
     private String[] brikListe = { //indeholder navnene på hvert brik/billede
             "brik3.png", "brik16.png", "brik9.png", "brik18.png", "brik15.png", "brik8.png",
@@ -46,19 +48,25 @@ public class VendeSpil extends Application
                 ++t; //tælleren stiger med 1 for hver brik, der bliver lavet.
             }
 
-        //rektangel som knap
+        //opretter rektangel -> bruger vi senere som knap
         Rectangle rect = new Rectangle(245, 600, 100, 40);
         rect.setFill(Color.BLACK);
-        //tekst oven på vores rektangel / knap
+        //opretter tekst oven på vores rektangel / knap
         Text knapTekst = new Text("Reset");
         knapTekst.setFill(Color.WHITE);
         knapTekst.setX(280);
         knapTekst.setY(625);
 
+        //opretter antal stik som tekst
+        antalStikTekst = new Text("Antal Stik: " + antalStik);
+        antalStikTekst.setFill(Color.BLACK);
+        antalStikTekst.setX(25);
+        antalStikTekst.setY(625);
+
         rect.setOnMouseClicked(event -> restart()); //ved klik på rectangel starter restart-metoden
         knapTekst.setOnMouseClicked(event -> restart()); //ved klik på knapTekst starter restart-metoden
 
-        scenegraf.getChildren().addAll(rect, knapTekst); //rectangel og tekst på knappen vises på scenen
+        scenegraf.getChildren().addAll(rect, knapTekst, antalStikTekst); //rectangel og tekst på knappen vises på scenen
 
         // Sæt scenen op
         Scene scene = new Scene(scenegraf, 590, 650);
@@ -96,6 +104,9 @@ public class VendeSpil extends Application
             if (vendtBrik1.getBriknavn().equals(vendtBrik2.getBriknavn())) //det er et match
             // den henter navnet på begge billeder og tjekker om de er equals.
             {
+                antalStik++; //tilføjer 1 point når kortene er et match
+                antalStikTekst.setText("Antal Stik: " + antalStik);
+
                 PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                 //vi bruger PauseTransition til at give spilleren 0.5 sec til at se brikkerne inden de forsvinder.
                 pause.setOnFinished(event -> //efter de 0,5 sek er gået skal følgende ske
