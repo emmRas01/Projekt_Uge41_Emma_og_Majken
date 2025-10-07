@@ -119,7 +119,7 @@ public class VendeSpil extends Application
         {
             vendtBrik1 = b;     //ved 1. klik gemmes brikken som "vendtBrik1"
             vendtBrik1.vend();  //vender brikken, så billedet kan ses.
-        } else { //der er allerede vendt en brik -> så er det anden brik.
+        } else if(vendtBrik2 == null) { //der er allerede vendt en brik -> så er det anden brik.
             vendtBrik2 = b;    //ved 2. klik gemmes brikken som "vendtBrik2"
             vendtBrik2.vend(); //vender brikken, så billedet kan ses.
 
