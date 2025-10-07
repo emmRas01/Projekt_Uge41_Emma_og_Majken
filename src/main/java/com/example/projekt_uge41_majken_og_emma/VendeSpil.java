@@ -25,6 +25,8 @@ public class VendeSpil extends Application
 
     private int antalStik = 0;
     private Text antalStikTekst;
+    private int antalTraek = 0;
+    private Text antalTraekTekst;
 
     private Pane scenegraf;
 
@@ -61,10 +63,17 @@ public class VendeSpil extends Application
         antalStikTekst.setX(25);
         antalStikTekst.setY(625);
 
+        //opretter antal træk som tekst
+        antalTraekTekst = new Text("Antal Træk: " + antalTraek);
+        antalTraekTekst.setFill(Color.BLACK);
+        antalTraekTekst.setFont(Font.font("Cambria", 20)); //teksttype og tekst størrelse
+        antalTraekTekst.setX(450);
+        antalTraekTekst.setY(625);
+
         rect.setOnMouseClicked(event -> restart()); //ved klik på rectangel starter restart-metoden
         knapTekst.setOnMouseClicked(event -> restart()); //ved klik på knapTekst starter restart-metoden
 
-        scenegraf.getChildren().addAll(rect, knapTekst, antalStikTekst); //rectangel og tekst på knappen vises på scenen
+        scenegraf.getChildren().addAll(rect, knapTekst, antalStikTekst, antalTraekTekst); //rectangel og tekst på knappen vises på scenen
 
         // Sæt scenen op
         Scene scene = new Scene(scenegraf, 590, 650);
@@ -113,6 +122,9 @@ public class VendeSpil extends Application
         } else { //der er allerede vendt en brik -> så er det anden brik.
             vendtBrik2 = b;    //ved 2. klik gemmes brikken som "vendtBrik2"
             vendtBrik2.vend(); //vender brikken, så billedet kan ses.
+
+            antalTraek++;
+            antalTraekTekst.setText("Antal Træk: " + antalTraek);
 
             if (vendtBrik1.getBriknavn().equals(vendtBrik2.getBriknavn())) //det er et match
             // den henter navnet på begge billeder og tjekker om de er equals.
