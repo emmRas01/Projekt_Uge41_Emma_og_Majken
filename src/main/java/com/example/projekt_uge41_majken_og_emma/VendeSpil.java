@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class VendeSpil extends Application
 {
@@ -31,6 +32,8 @@ public class VendeSpil extends Application
 
     public void start(Stage stage) throws IOException {
         Pane scenegraf = new Pane(); //opretter en scene
+
+        java.util.Collections.shuffle(java.util.Arrays.asList(brikListe));
 
         //Her sættes banen op i et 6x6 gitter
         brikker = new Brik[6][6];
@@ -62,6 +65,17 @@ public class VendeSpil extends Application
         stage.setTitle("Vende Spil :)");
         stage.setScene(scene);
         stage.show();
+    }
+
+    // blander et array af int i tilfældig rækkeflge
+    public void blandBrikker(int[] brikliste) {
+        Random rand = new Random();
+        for (int i = 0; i < brikListe.length; i++) {
+            int randomIndexToSwap = rand.nextInt(brikListe.length);
+            String temp = String.valueOf(Integer.parseInt(brikListe[randomIndexToSwap]));
+            brikListe[randomIndexToSwap] = brikListe[i];
+            brikListe[i] = temp;
+        }
     }
 
     public void klik(MouseEvent e)
