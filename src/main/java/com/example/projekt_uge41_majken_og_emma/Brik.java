@@ -14,8 +14,8 @@ public class Brik extends ImageView {
         forside = new Image(getClass().getResource(brikListe).toString()); //Vis forsiden som udgangspunkt
         bagside = new Image(getClass().getResource("bagside.png").toString());
         setImage(bagside);
-        setX(x * 90); //placering af brikken på x-aksen.
-        setY(y * 90); //placering af brikken på y-aksen.
+        setX(x * 100); //placering af brikken på x-aksen.
+        setY(y * 100); //placering af brikken på y-aksen.
     }
 
     public void vend()

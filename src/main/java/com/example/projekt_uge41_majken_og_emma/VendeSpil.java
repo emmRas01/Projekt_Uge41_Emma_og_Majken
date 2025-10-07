@@ -44,13 +44,13 @@ public class VendeSpil extends Application
             }
 
         //rektangel som knap
-        Rectangle rect = new Rectangle(220, 550, 100, 40);
+        Rectangle rect = new Rectangle(245, 600, 100, 40);
         rect.setFill(Color.BLACK);
         //tekst oven på vores rektangel / knap
         Text knapTekst = new Text("Reset");
         knapTekst.setFill(Color.WHITE);
-        knapTekst.setX(255);
-        knapTekst.setY(575);
+        knapTekst.setX(280);
+        knapTekst.setY(625);
 
         rect.setOnMouseClicked(event -> restart()); //ved klik på rectangel starter restart-metoden
         knapTekst.setOnMouseClicked(event -> restart()); //ved klik på knapTekst starter restart-metoden
@@ -58,7 +58,7 @@ public class VendeSpil extends Application
         scenegraf.getChildren().addAll(rect, knapTekst); //rectangel og tekst på knappen vises på scenen
 
         // Sæt scenen op
-        Scene scene = new Scene(scenegraf, 540, 600);
+        Scene scene = new Scene(scenegraf, 590, 650);
         stage.setTitle("Vende Spil :)");
         stage.setScene(scene);
         stage.show();
