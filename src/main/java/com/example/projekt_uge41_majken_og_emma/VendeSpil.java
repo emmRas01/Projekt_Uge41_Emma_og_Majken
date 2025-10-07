@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -54,12 +55,14 @@ public class VendeSpil extends Application
         //opretter tekst oven på vores rektangel / knap
         Text knapTekst = new Text("Reset");
         knapTekst.setFill(Color.WHITE);
-        knapTekst.setX(280);
-        knapTekst.setY(625);
+        knapTekst.setFont(Font.font("Cambria", 20)); //teksttype og tekst størrelse
+        knapTekst.setX(271);
+        knapTekst.setY(627);
 
         //opretter antal stik som tekst
         antalStikTekst = new Text("Antal Stik: " + antalStik);
         antalStikTekst.setFill(Color.BLACK);
+        antalStikTekst.setFont(Font.font("Cambria", 20)); //teksttype og tekst størrelse
         antalStikTekst.setX(25);
         antalStikTekst.setY(625);
 
