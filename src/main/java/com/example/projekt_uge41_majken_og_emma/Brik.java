@@ -27,4 +27,9 @@ public class Brik extends ImageView {
     {
          return brikNavn; //her henter vi navnet på den enkelte brik
     }
+
+    public void setBriknavn(String briknavn)
+    {
+        this.brikNavn = briknavn;
+    }
 }

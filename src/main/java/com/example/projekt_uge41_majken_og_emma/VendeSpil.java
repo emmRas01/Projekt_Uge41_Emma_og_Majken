@@ -36,7 +36,7 @@ public class VendeSpil extends Application
     public void start(Stage stage) throws IOException {
         Pane scenegraf = new Pane(); //opretter en scene
 
-        java.util.Collections.shuffle(java.util.Arrays.asList(brikListe));
+        java.util.Collections.shuffle(java.util.Arrays.asList(brikListe)); //bland brikkerne
 
         //Her sættes banen op i et 6x6 gitter
         brikker = new Brik[6][6];
@@ -137,7 +137,23 @@ public class VendeSpil extends Application
 
     public void restart() //ved klik på rectangel starter denne metode
     {
+        antalStik = 0; //nulstiller antalStik
+        antalStikTekst.setText("Antal Stik: " + antalStik); //nulstiller teksten på scenen
+        vendtBrik1 = null; //nulstiller brik 1
+        vendtBrik2 = null; //nulstiller brik 2
 
+        java.util.Collections.shuffle(java.util.Arrays.asList(brikListe)); //bland brikkerne igen
+
+        //kode der gennemløber alle brikkerne og nulstiller dem
+        int t = 0;
+        for (int i = 0; i < 6; i++) //gennemgår rækkerne
+            for (int j = 0; j < 6; j++) //gennemgår kolonnerne
+            {
+                brikker[i][j].setVisible(true); //forsvunde brikker bliver synlige igen
+                brikker[i][j].setImage(new Image(getClass().getResource("bagside.png").toString())); //starter med bagsiden opad
+                brikker[i][j].setBriknavn(brikListe[t]); //resetter briknavnet
+                t++; //tæller til at køre det i et loop
+            }
     }
 
     public static void main(String[] args) {
