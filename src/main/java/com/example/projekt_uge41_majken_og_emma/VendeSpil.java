@@ -19,10 +19,14 @@ import java.util.Random;
 public class VendeSpil extends Application
 {
     private Brik[][] brikker; //opretter et 2D array. Alle brikker holdes i arrayet.
+
     private Brik vendtBrik1 = null; //variabel der bruges til at holde styr på hvilke brikker der er vendt
     private Brik vendtBrik2 = null;
+
     private int antalStik = 0;
     private Text antalStikTekst;
+
+    private Pane scenegraf;
 
     private String[] brikListe = { //indeholder navnene på hvert brik/billede
             "brik3.png", "brik16.png", "brik9.png", "brik18.png", "brik15.png", "brik8.png",
@@ -34,20 +38,11 @@ public class VendeSpil extends Application
     };
 
     public void start(Stage stage) throws IOException {
-        Pane scenegraf = new Pane(); //opretter en scene
+        scenegraf = new Pane(); //opretter en scene
 
         java.util.Collections.shuffle(java.util.Arrays.asList(brikListe)); //bland brikkerne
 
-        //Her sættes banen op i et 6x6 gitter
-        brikker = new Brik[6][6];
-        int t = 0; //vi laver en tæller til at lave en loop, så alle 36 brikker får et unikt billed.
-        for (int i = 0; i < 6; i++)
-            for (int j = 0; j < 6; j++) {
-                brikker[i][j] = new Brik(i, j, brikListe[t]); //Lav hver brik som et objekt "Brik" med position og billede.
-                scenegraf.getChildren().add(brikker[i][j]); //Tilføj brikken til scenegrafen
-                brikker[i][j].setOnMouseClicked(e -> klik(e)); //Tilføj musse-klik til brikken
-                ++t; //tælleren stiger med 1 for hver brik, der bliver lavet.
-            }
+        baneOpsaetning();
 
         //opretter rektangel -> bruger vi senere som knap
         Rectangle rect = new Rectangle(245, 600, 100, 40);
@@ -79,7 +74,8 @@ public class VendeSpil extends Application
     }
 
     // blander et array af int i tilfældig rækkeflge
-    public void blandBrikker(int[] brikliste) {
+    public void blandBrikker(int[] brikliste)
+    {
         Random rand = new Random();
         for (int i = 0; i < brikListe.length; i++) {
             int randomIndexToSwap = rand.nextInt(brikListe.length);
@@ -87,6 +83,20 @@ public class VendeSpil extends Application
             brikListe[randomIndexToSwap] = brikListe[i];
             brikListe[i] = temp;
         }
+    }
+
+    public void baneOpsaetning()
+    {
+        //Her sættes banen op i et 6x6 gitter
+        brikker = new Brik[6][6];
+        int t = 0; //vi laver en tæller til at lave en loop, så alle 36 brikker får et unikt billed.
+        for (int i = 0; i < 6; i++)
+            for (int j = 0; j < 6; j++) {
+                brikker[i][j] = new Brik(i, j, brikListe[t]); //Lav hver brik som et objekt "Brik" med position og billede.
+                scenegraf.getChildren().add(brikker[i][j]); //Tilføj brikken til scenegrafen
+                brikker[i][j].setOnMouseClicked(e -> klik(e)); //Tilføj musse-klik til brikken
+                ++t; //tælleren stiger med 1 for hver brik, der bliver lavet.
+            }
     }
 
     public void klik(MouseEvent e)
@@ -137,7 +147,9 @@ public class VendeSpil extends Application
 
     public void restart() //ved klik på rectangel starter denne metode
     {
-
+        baneOpsaetning();
+        antalStik = 0;
+        antalStikTekst.setText("Antal Stik: " + antalStik);
     }
 
     public static void main(String[] args) {
