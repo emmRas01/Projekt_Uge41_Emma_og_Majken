@@ -162,7 +162,9 @@ public class VendeSpil extends Application
 
     public void restart() //ved klik på rectangel restarter spillet
     {
-        baneOpsaetning(); //kalder bane opsætningen, så banen startes forfra
+        scenegraf.getChildren().removeIf(node -> node instanceof Brik); //fjerner alle gamle brikker fra scenegraf
+
+        baneOpsaetning(); //kalder bane opsætningen, så brikkerne sættes op igen
 
         antalStik = 0; //nulstiller tælleren
         antalStikTekst.setText("Antal Stik: " + antalStik); //opdatere tekst
@@ -172,6 +174,8 @@ public class VendeSpil extends Application
 
         vendtBrik1 = null; //nulstiller variablen der holder styr på første vendt brik
         vendtBrik2 = null; //nulstiller variablen der holder styr på anden vendt brik
+
+        scenegraf.getChildren().remove(vinderTekst); //hvis vinder teksten er der, så fjernes den ved restart
     }
 
     public static void main(String[] args)
