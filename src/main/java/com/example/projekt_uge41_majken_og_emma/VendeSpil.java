@@ -45,8 +45,6 @@ public class VendeSpil extends Application
     {
         scenegraf = new Pane(); //opretter en scene
 
-        java.util.Collections.shuffle(java.util.Arrays.asList(brikListe)); //blander brikkerne tilfældigt
-
         baneOpsaetning(); //sætter banen op
 
         //opretter rektangel -> bruger vi senere som knap
@@ -95,6 +93,7 @@ public class VendeSpil extends Application
 
     public void baneOpsaetning() //metode der placere vores brikker
     {
+        java.util.Collections.shuffle(java.util.Arrays.asList(brikListe)); //blander brikkerne tilfældigt
         brikker = new Brik[6][6]; //Her sættes banen op i et 6x6 gitter
         int t = 0; //vi laver en tæller til at lave en loop, så alle 36 brikker får et unikt billed.
         for (int i = 0; i < 6; i++) //løber igennem rækkerne
