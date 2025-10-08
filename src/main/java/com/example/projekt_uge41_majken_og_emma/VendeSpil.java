@@ -33,12 +33,12 @@ public class VendeSpil extends Application
                             // Placeres her så metoden baneOpsaetning kan bruge den.
 
     private String[] brikListe = { //indeholder navnene på hvert brik/billede
-            "brik3.png", "brik16.png", "brik9.png", "brik18.png", "brik15.png", "brik8.png",
-            "brik14.png", "brik11.png", "brik1.png", "brik4.png", "brik7.png", "brik12.png",
-            "brik1.png", "brik12.png", "brik2.png", "brik9.png", "brik10.png", "brik5.png",
-            "brik2.png", "brik10.png", "brik7.png", "brik6.png", "brik14.png", "brik11.png",
-            "brik18.png", "brik6.png", "brik4.png", "brik5.png", "brik3.png", "brik17.png",
-            "brik15.png", "brik17.png", "brik13.png", "brik16.png", "brik8.png", "brik13.png",
+            "brik1.png", "brik1.png", "brik2.png", "brik2.png", "brik3.png", "brik3.png",
+            "brik4.png", "brik4.png", "brik5.png", "brik5.png", "brik6.png", "brik6.png",
+            "brik7.png", "brik7.png", "brik8.png", "brik8.png", "brik9.png", "brik9.png",
+            "brik10.png", "brik10.png", "brik11.png", "brik11.png", "brik12.png", "brik12.png",
+            "brik13.png", "brik13.png", "brik14.png", "brik14.png", "brik15.png", "brik15.png",
+            "brik16.png", "brik16.png", "brik17.png", "brik17.png", "brik18.png", "brik18.png",
     };
 
     public void start(Stage stage) throws IOException
