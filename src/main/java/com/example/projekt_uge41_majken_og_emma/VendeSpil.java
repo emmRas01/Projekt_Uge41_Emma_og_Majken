@@ -169,6 +169,9 @@ public class VendeSpil extends Application
 
         antalTraek = 0; //nulstiller tælleren
         antalTraekTekst.setText("Antal Træk: " + antalTraek); //opdatere tekst
+
+        vendtBrik1 = null; //nulstiller variablen der holder styr på første vendt brik
+        vendtBrik2 = null; //nulstiller variablen der holder styr på anden vendt brik
     }
 
     public static void main(String[] args)
