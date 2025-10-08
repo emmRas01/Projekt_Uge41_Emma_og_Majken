@@ -1,10 +1,7 @@
 package com.example.projekt_uge41_majken_og_emma;
 
-import javafx.animation.ScaleTransition;
-import javafx.animation.SequentialTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 
 public class Brik extends ImageView
 {
