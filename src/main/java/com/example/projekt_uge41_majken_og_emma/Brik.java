@@ -21,6 +21,7 @@ public class Brik extends ImageView
     }
 
     public void vendTransition() //bruges i vores klik-metode
+            //giver illusion af at brikken vender fra bagside til forside
     {
         ScaleTransition gemBagside = new ScaleTransition(Duration.seconds(0.3),this);
         gemBagside.setToX(0);
@@ -29,6 +30,19 @@ public class Brik extends ImageView
 
         gemBagside.setOnFinished(e -> {setImage(forside);visForside.play();});
         gemBagside.play();
+    }
+
+    public void visBagside() //bruges i vores klik-metode
+            //giver illusion af at brikken vender fra forside til bagside
+            //den virker ikke :'(
+    {
+        ScaleTransition gemForside = new ScaleTransition(Duration.seconds(0.3),this);
+        gemForside.setToX(0);
+        ScaleTransition visBagside = new ScaleTransition(Duration.seconds(0.3),this);
+        visBagside.setToX(1);
+
+        gemForside.setOnFinished(e -> {setImage(bagside);visBagside.play();});
+        gemForside.play();
     }
 
     public void vendTilBagsiden()
