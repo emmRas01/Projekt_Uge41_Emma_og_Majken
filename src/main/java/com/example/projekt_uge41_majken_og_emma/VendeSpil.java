@@ -138,8 +138,8 @@ public class VendeSpil extends Application
                 //vi bruger PauseTransition til at give spilleren 1 sec til at se brikkerne inden de forsvinder.
                 pause.setOnFinished(event -> //efter de 1 sek er gået skal følgende ske
                 {
-                    vendtBrik1.visBagside();
-                    vendtBrik2.visBagside();
+                    vendtBrik1.setVisible(false); //gør brikken usynlig ved match
+                    vendtBrik2.setVisible(false); //gør brikken usynlig ved match
                     vendtBrik1 = null; //nulstiller, så vi kan klikke på flere brikker
                     vendtBrik2 = null; //nulstiller, så vi kan klikke på flere brikker
                 });
@@ -149,8 +149,8 @@ public class VendeSpil extends Application
                 //vi bruger PauseTransition til at give spilleren 1 sec til at se brikkerne inden de vendes til bagsiden.
                 pause.setOnFinished(event -> //efter de 1 sek er gået skal følgende ske
                 {
-                    vendtBrik1.vendTilBagsiden(); //brikkerne vendes til bagsiden
-                    vendtBrik2.vendTilBagsiden(); //brikkerne vendes til bagsiden
+                    vendtBrik1.visBagside(); //brikkerne vendes til bagsiden med transition
+                    vendtBrik2.visBagside(); //brikkerne vendes til bagsiden med transition
                     vendtBrik1 = null; //nulstiller, så vi kan klikke på 2 nye brikker
                     vendtBrik2 = null; //nulstiller, så vi kan klikke på 2 nye brikker
                 });

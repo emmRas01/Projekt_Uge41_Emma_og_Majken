@@ -34,7 +34,6 @@ public class Brik extends ImageView
 
     public void visBagside() //bruges i vores klik-metode
             //giver illusion af at brikken vender fra forside til bagside
-            //den virker ikke :'(
     {
         ScaleTransition gemForside = new ScaleTransition(Duration.seconds(0.3),this);
         gemForside.setToX(0);
@@ -43,11 +42,6 @@ public class Brik extends ImageView
 
         gemForside.setOnFinished(e -> {setImage(bagside);visBagside.play();});
         gemForside.play();
-    }
-
-    public void vendTilBagsiden()
-    {
-        setImage(bagside);
     }
 
     public String getBriknavn() //bruges i vores klik-metode til at tjekke match
