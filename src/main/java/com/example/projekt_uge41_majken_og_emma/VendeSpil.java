@@ -3,7 +3,6 @@ package com.example.projekt_uge41_majken_og_emma;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -116,10 +115,10 @@ public class VendeSpil extends Application
         if (vendtBrik1 == null) //er der ikke vendt en brik endnu? -> Så er det første brik.
         {
             vendtBrik1 = b;     //ved 1. klik gemmes brikken som "vendtBrik1"
-            vendtBrik1.vend();  //vender brikken, så billedet kan ses.
+            vendtBrik1.vendTransition();  //vender brikken, så billedet kan ses.
         } else if(vendtBrik2 == null) { //der er allerede vendt en brik -> så er det anden brik.
             vendtBrik2 = b;    //ved 2. klik gemmes brikken som "vendtBrik2"
-            vendtBrik2.vend(); //vender brikken, så billedet kan ses.
+            vendtBrik2.vendTransition(); //vender brikken, så billedet kan ses.
 
             antalTraek++; //når spilleren har vendt 2 brikker giver det 1 træk
             antalTraekTekst.setText("Antal Træk: " + antalTraek); //opdatere tekst
@@ -150,8 +149,8 @@ public class VendeSpil extends Application
                 //vi bruger PauseTransition til at give spilleren 0.5 sec til at se brikkerne inden de vendes til bagsiden.
                 pause.setOnFinished(event -> //efter de 0,5 sek er gået skal følgende ske
                 {
-                    vendtBrik1.setImage(new Image(getClass().getResource("bagside.png").toString())); //brikkerne vendes til bagsiden
-                    vendtBrik2.setImage(new Image(getClass().getResource("bagside.png").toString())); //brikkerne vendes til bagsiden
+                    vendtBrik1.vendTilBagsiden(); //brikkerne vendes til bagsiden
+                    vendtBrik2.vendTilBagsiden(); //brikkerne vendes til bagsiden
                     vendtBrik1 = null; //nulstiller, så vi kan klikke på 2 nye brikker
                     vendtBrik2 = null; //nulstiller, så vi kan klikke på 2 nye brikker
                 });
