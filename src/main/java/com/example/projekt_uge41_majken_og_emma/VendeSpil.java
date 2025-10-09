@@ -135,7 +135,7 @@ public class VendeSpil extends Application
                     scenegraf.getChildren().addAll(vinderTekst); //tilføjer teksten til scenen
                 }
 
-                PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
                 //vi bruger PauseTransition til at give spilleren 0.5 sec til at se brikkerne inden de forsvinder.
                 pause.setOnFinished(event -> //efter de 0,5 sek er gået skal følgende ske
                 {
@@ -146,7 +146,7 @@ public class VendeSpil extends Application
                 });
                 pause.play(); //spillet pauses, så setOnFinished starter 0,5 sek efter.
             } else { //det er ikke et match
-                PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
                 //vi bruger PauseTransition til at give spilleren 0.5 sec til at se brikkerne inden de vendes til bagsiden.
                 pause.setOnFinished(event -> //efter de 0,5 sek er gået skal følgende ske
                 {

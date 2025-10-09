@@ -1,7 +1,11 @@
 package com.example.projekt_uge41_majken_og_emma;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.ScaleTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class Brik extends ImageView
 {
@@ -20,7 +24,13 @@ public class Brik extends ImageView
 
     public void vend() //bruges i vores klik-metode
     {
-        setImage(forside); // Her vendes brikken.
+        ScaleTransition gemBagside = new ScaleTransition(Duration.seconds(0.3),this);
+        gemBagside.setToX(0);
+        ScaleTransition visForside = new ScaleTransition(Duration.seconds(0.3),this);
+        visForside.setToX(1);
+
+        gemBagside.setOnFinished(e -> {setImage(forside);visForside.play();});
+        gemBagside.play();
     }
 
     public String getBriknavn() //bruges i vores klik-metode til at tjekke match
